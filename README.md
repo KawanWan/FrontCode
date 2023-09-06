@@ -27,16 +27,6 @@
 🔹 Recursos inseridos 
 
 🔹 Desenvolvedores/Contribuintes
-
-  *Cicero Augusto Oliveira do Nascimento , 236723, augustocicero831@gmail.com, Gerente de Projeto
-
-  *Kawan Wan Der Maas do Nascimento, kawan.wan18@gmail.com, 236737, Programador Java
-
-  *Gustavo Silva Santos , 236703, ,Design
-
-  *Augusto Melo Vernek , 236186, Programador Java
-
-  *Pedro Henrique Duarte -236519, Programado Banco de Dados
   
 🔹 Informações Extras
 
