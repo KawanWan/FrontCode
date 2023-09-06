@@ -112,4 +112,4 @@ Pedro Henrique Duarte -236519, Programado Banco de Dados
 ## Licença
 The MIT License (MIT)
 
-## Copyright ©️ Ano - Titulo do Projeto
+## Copyright ©️ 2023 - Descarte Consciente
