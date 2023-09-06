@@ -1,6 +1,6 @@
-# Titulo ou Arte do Projeto
+# FrontCode - Descarte Consciente
 ## Versão: 0.1
-## Status do Projeto: ⚠️ Espera
+## Status do Projeto: ⚠️ Em andamento
 
 ## Tópicos
 🔹 Site 
