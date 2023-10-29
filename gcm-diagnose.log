@@ -1,0 +1,180 @@
+﻿Diagnose log at 2023-10-29T23:44:38Z
+
+AppPath: /usr/local/bin/git-credential-manager
+InstallDir: /usr/local/share/gcm-core/
+Version: 2.3.2
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Linux
+OSVersion: Ubuntu 22.04.3 LTS
+Reading environment variables... OK
+ Variables:
+COLORTERM=truecolor
+HOME=/home/ciceroaon
+XDG_RUNTIME_DIR=/run/user/1000
+XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.GFAID2
+QT_IM_MODULE=ibus
+_=/usr/bin/git
+LESSCLOSE=/usr/bin/lesspipe %s %s
+SHELL=/bin/bash
+IM_CONFIG_PHASE=1
+TERM=xterm-256color
+GIT_EXEC_PATH=/usr/lib/git-core
+GNOME_TERMINAL_SERVICE=:1.262
+GNOME_SHELL_SESSION_MODE=ubuntu
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+XDG_SESSION_TYPE=wayland
+QT_ACCESSIBILITY=1
+PWD=/home/ciceroaon/Projetos/FrontCode
+DESKTOP_SESSION=ubuntu
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+VTE_VERSION=6800
+GDMSESSION=ubuntu
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+WAYLAND_DISPLAY=wayland-0
+GTK_MODULES=gail:atk-bridge
+LANG=pt_BR.UTF-8
+SHLVL=1
+DISPLAY=:0
+USER=ciceroaon
+XMODIFIERS=@im=ibus
+XDG_MENU_PREFIX=gnome-
+LESSOPEN=| /usr/bin/lesspipe %s
+USERNAME=ciceroaon
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+XDG_SESSION_CLASS=user
+LOGNAME=ciceroaon
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+XDG_SESSION_DESKTOP=ubuntu
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/0464a250_1705_4fe6_b476_2556b4f92179
+SSH_AGENT_LAUNCHER=gnome-keyring
+SESSION_MANAGER=local/DagonBits:@/tmp/.ICE-unix/1600,unix/DagonBits:/tmp/.ICE-unix/1600
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+LANGUAGE=pt_BR:pt:en
+PATH=/usr/lib/git-core:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+SYSTEMD_EXEC_PID=1834
+GIT_TRACE2_PARENT_SID=a2399f6f-4eb2-43c3-a422-ae0fb4139627
+GNOME_SETUP_DISPLAY=:1
+OLDPWD=/home/ciceroaon
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is '/tmp/'...
+Checking basic file I/O...
+Writing to temporary file '/tmp/715445afbf0d234a779c98fc'... OK
+Reading from temporary file '/tmp/715445afbf0d234a779c98fc'... OK
+Deleting temporary file '/tmp/715445afbf0d234a779c98fc'... OK
+Testing IFileSystem instance...
+UserHomePath: /home/ciceroaon
+UserDataDirectoryPath: /home/ciceroaon/.gcm
+GetCurrentDirectory(): /home/ciceroaon/Projetos/FrontCode
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:46057/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.34.1'
+Locating current repository... OK
+Git repository at '/home/ciceroaon/Projetos/FrontCode/.git'
+Listing all Git configuration... OK
+Git configuration:
+file:/home/ciceroaon/.gitconfig	user.email=augustocicero831@gmail.com
+file:/home/ciceroaon/.gitconfig	user.name=CiceroAON
+file:/home/ciceroaon/.gitconfig	credential.helper=
+file:/home/ciceroaon/.gitconfig	credential.helper=/usr/local/bin/git-credential-manager
+file:/home/ciceroaon/.gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=true
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	remote.origin.url=https://github.com/KawanWan/FrontCode.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	branch.main.remote=origin
+file:.git/config	branch.main.merge=refs/heads/main
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: False
+Exception:
+System.Exception: No credential store has been selected.
+
+Set the GCM_CREDENTIAL_STORE environment variable or the credential.credentialStore Git configuration setting to one of the following options:
+
+  secretservice : freedesktop.org Secret Service (requires graphical interface)
+  gpg           : GNU `pass` compatible credential storage (requires GPG and `pass`)
+  cache         : Git's in-memory credential cache
+  plaintext     : store credentials in plain-text files (UNSECURE)
+
+See https://aka.ms/gcm/credstores for more information.
+
+   at GitCredentialManager.CredentialStore.EnsureBackingStore()
+   at GitCredentialManager.CredentialStore.Remove(String service, String account)
+   at GitCredentialManager.Diagnostics.CredentialStoreDiagnostic.RunInternalAsync(StringBuilder log, IList`1 additionalFiles)
+   at GitCredentialManager.Diagnostics.Diagnostic.RunAsync()
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential...Deleting test credential...
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: /home/ciceroaon/.local/.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: /home/ciceroaon/.local/.IdentityService/msal.cache
+KeyringCollection: 
+KeyringSchemaName: 
+KeyringSecretLabel: 
+KeyringAttribute1: (,)
+KeyringAttribute2: (,)
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+

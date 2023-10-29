@@ -13,12 +13,28 @@ import javax.swing.JOptionPane;
  * @author ciceroaon
  */
 public class HomeView extends javax.swing.JFrame {
+    private String nomeUsuario;
+    /**
+     * Creates new form HomeView
+     */
 
     /**
      * Creates new form HomeView
      */
     public HomeView() {
         initComponents();
+    }
+    
+    public void setUsuario(String nome) {
+        this.nomeUsuario = nome;
+    }
+    public String getUsuario() {
+        return nomeUsuario;
+    }
+    
+    public void abaSelecionada(boolean residuos, boolean cadastrar) {
+        jResiduos.setVisible(residuos);
+        jCadastrar.setVisible(cadastrar);
     }
 
     /**
@@ -30,14 +46,15 @@ public class HomeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        barraLateral = new javax.swing.JPanel();
+        abaFuncionario = new javax.swing.JToggleButton();
         abaResiduos = new javax.swing.JToggleButton();
+        txtUserName = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMain = new javax.swing.JPanel();
         jCadastrar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         pssCSenha = new javax.swing.JPasswordField();
         pssSenha = new javax.swing.JPasswordField();
@@ -54,15 +71,20 @@ public class HomeView extends javax.swing.JFrame {
         btnAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbResiduos = new javax.swing.JTable();
-        abaFuncionario = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Perfil.png"))); // NOI18N
+        barraLateral.setBackground(new java.awt.Color(57, 48, 74));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Nome_Usuario");
+        abaFuncionario.setText("Cadastrar Funcionário");
+        abaFuncionario.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        abaFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaFuncionarioActionPerformed(evt);
+            }
+        });
 
+        abaResiduos.setSelected(true);
         abaResiduos.setText("Resíduos");
         abaResiduos.setMargin(new java.awt.Insets(0, 0, 0, 0));
         abaResiduos.addActionListener(new java.awt.event.ActionListener() {
@@ -71,9 +93,52 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
+        txtUserName.setForeground(new java.awt.Color(255, 255, 255));
+        txtUserName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtUserName.setText(this.nomeUsuario);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Perfil.png"))); // NOI18N
+
+        javax.swing.GroupLayout barraLateralLayout = new javax.swing.GroupLayout(barraLateral);
+        barraLateral.setLayout(barraLateralLayout);
+        barraLateralLayout.setHorizontalGroup(
+            barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraLateralLayout.createSequentialGroup()
+                .addGap(0, 33, Short.MAX_VALUE)
+                .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(abaFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1))))
+        );
+        barraLateralLayout.setVerticalGroup(
+            barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraLateralLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtUserName)
+                .addGap(25, 25, 25)
+                .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(abaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jMain.setBackground(new java.awt.Color(32, 32, 48));
+        jMain.setAlignmentX(0.0F);
+        jMain.setAlignmentY(0.0F);
+        jMain.setMaximumSize(new java.awt.Dimension(720, 480));
+        jMain.setName(""); // NOI18N
+        jMain.setPreferredSize(new java.awt.Dimension(600, 430));
         jMain.setLayout(new java.awt.CardLayout());
 
+        jCadastrar.setOpaque(false);
+
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cadastro de Funcionários");
 
         btnCadastro.setText("Cadastrar");
@@ -83,15 +148,10 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Confirme a Senha:");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Data de Nascimento:");
 
         txtNome.addActionListener(new java.awt.event.ActionListener() {
@@ -100,10 +160,13 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CPF:");
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Senha:");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Nome:");
 
         javax.swing.GroupLayout jCadastrarLayout = new javax.swing.GroupLayout(jCadastrar);
@@ -115,30 +178,27 @@ public class HomeView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jCadastrarLayout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jCadastrarLayout.createSequentialGroup()
-                                .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jCadastrarLayout.createSequentialGroup()
-                                        .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 128, Short.MAX_VALUE))
-                                    .addComponent(txtNome)
-                                    .addComponent(txtCpf)
-                                    .addComponent(pssSenha)
-                                    .addComponent(pssCSenha)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jCadastrarLayout.createSequentialGroup()
-                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jCadastrarLayout.createSequentialGroup()
+                                .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 73, Short.MAX_VALUE))
+                            .addComponent(txtNome)
+                            .addComponent(txtCpf)
+                            .addComponent(pssSenha)
+                            .addComponent(pssCSenha)))
                     .addGroup(jCadastrarLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jCadastrarLayout.createSequentialGroup()
+                                .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86)))))
                 .addGap(180, 180, 180))
         );
         jCadastrarLayout.setVerticalGroup(
@@ -166,14 +226,14 @@ public class HomeView extends javax.swing.JFrame {
                 .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pssCSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastro)
-                    .addComponent(btnVoltar))
-                .addGap(136, 136, 136))
+                .addGap(94, 94, 94)
+                .addComponent(btnCadastro)
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         jMain.add(jCadastrar, "card3");
+
+        jResiduos.setOpaque(false);
 
         btnExcluir.setText("Excluir");
 
@@ -201,14 +261,14 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(jResiduosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jResiduosLayout.createSequentialGroup()
                         .addComponent(btnAdicionar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditar)
                         .addGap(18, 18, 18)
                         .addComponent(btnExcluir)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         jResiduosLayout.setVerticalGroup(
             jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,54 +285,30 @@ public class HomeView extends javax.swing.JFrame {
 
         jMain.add(jResiduos, "card2");
 
-        abaFuncionario.setText("Cadastrar Funcionário");
-        abaFuncionario.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        abaFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abaFuncionarioActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(abaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(barraLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jMain, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(abaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 0, 0)
+                .addComponent(jMain, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
+            .addComponent(barraLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void abaResiduosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaResiduosActionPerformed
-        jCadastrar.setVisible(false);
-        jResiduos.setVisible(true);
+        aba
     }//GEN-LAST:event_abaResiduosActionPerformed
 
     private void abaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaFuncionarioActionPerformed
@@ -316,10 +352,6 @@ public class HomeView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastroActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
@@ -327,7 +359,7 @@ public class HomeView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -362,14 +394,13 @@ public class HomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton abaFuncionario;
     private javax.swing.JToggleButton abaResiduos;
+    private javax.swing.JPanel barraLateral;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCadastro;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnVoltar;
     private javax.swing.JPanel jCadastrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -385,5 +416,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JLabel txtUserName;
     // End of variables declaration//GEN-END:variables
 }
