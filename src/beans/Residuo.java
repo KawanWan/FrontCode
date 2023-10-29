@@ -11,7 +11,7 @@ public class Residuo {
 
     public Residuo() {
     }
-
+    //teste commit
     public Residuo(int id, String nome, int quantidade, double valorVenda, String classe, Empresa empresa) {
         this.id = id;
         this.nome = nome;
