@@ -1,5 +1,5 @@
 # FrontCode - Descarte Consciente
-## Versão: 0.1
+## Versão: 0.6
 ## Status do Projeto: ⚠️ Em andamento
 
 ## Tópicos
@@ -48,17 +48,19 @@
 
 ✔️ Funcionalidade 3
 
-✔️ Funcionalidade 4
+  Cálcular e mostrar previsões de lucro
 
 ## Distribuição
 Link para teste da versão disponibilizada.
 
 ## Pré-requisitos ⚠️    
 
-- Liste todas as dependencias e libs que o usuário deve ter instalado na máquina antes de rodar a aplicação, para rodar o projeto.
+- Java Development Kit 21
+- MySQL Connector Java 8.2.0
+- MySQL Community Server 8.0.35
 
 ## Como rodar a aplicação 
-Bairxe e Intale o aplicativo que será disponilizado e inicie o aplicativo.
+Baixe a útlima versão disponível na aba (realese)[https://github.com/KawanWan/FrontCode/releases/tag/beta] e em seguida execute o script sql disponível na pasta 'db' utilizando o Workbench, PHPMyAdmin, Console ou meio preferível, tenha certeza que o MySQL esteja instalado e em execução em sua máquina. Após isso, execute o App.java e o sistema deverá estar funcionando.
 ## Testes realizados
 Utilização de imagens e descrição do qeu foi testado.
 
@@ -66,13 +68,11 @@ Utilização de imagens e descrição do qeu foi testado.
 Caso tenha acesso a uma base de dados, deixe a descrição do arquivo (json, csv, xml e etc).
 
 ## Linguagens, dependencias e libs utilizadas 📚
-![Android Studio](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 
 Java
 MySQL WorkBench
-XML
-...
-Liste as tecnologias utilizadas no projeto que não forem reconhecidas pelo Github
+MySQL Server
+MySQL Connector Java
 
 ## Resolvendo Problemas 
 Em issues foram abertos alguns problemas gerados durante o desenvolvimento desse projeto e como foram resolvidos.
