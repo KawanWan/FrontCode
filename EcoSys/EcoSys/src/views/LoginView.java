@@ -55,7 +55,7 @@ public class LoginView extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/150.150.png"))); // NOI18N
 
-        txtLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLoginActionPerformed(evt);
@@ -72,7 +72,7 @@ public class LoginView extends javax.swing.JFrame {
         lblSenha.setForeground(new java.awt.Color(88, 164, 176));
         lblSenha.setText("Esqueci a Senha");
         lblSenha.setToolTipText("");
-        lblSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblSenha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSenhaMouseClicked(evt);
@@ -82,7 +82,7 @@ public class LoginView extends javax.swing.JFrame {
         btnEntrar.setBackground(new java.awt.Color(225, 188, 41));
         btnEntrar.setText("Entrar");
         btnEntrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEntrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

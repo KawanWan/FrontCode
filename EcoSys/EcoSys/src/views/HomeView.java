@@ -34,7 +34,9 @@ public class HomeView extends javax.swing.JFrame {
     
     public void abaSelecionada(boolean residuos, boolean cadastrar) {
         jResiduos.setVisible(residuos);
+        abaResiduos.setSelected(residuos);
         jCadastrar.setVisible(cadastrar);
+        abaCadastrar.setSelected(cadastrar);
     }
 
     /**
@@ -47,7 +49,7 @@ public class HomeView extends javax.swing.JFrame {
     private void initComponents() {
 
         barraLateral = new javax.swing.JPanel();
-        abaFuncionario = new javax.swing.JToggleButton();
+        abaCadastrar = new javax.swing.JToggleButton();
         abaResiduos = new javax.swing.JToggleButton();
         txtUserName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -76,16 +78,21 @@ public class HomeView extends javax.swing.JFrame {
 
         barraLateral.setBackground(new java.awt.Color(57, 48, 74));
 
-        abaFuncionario.setText("Cadastrar Funcionário");
-        abaFuncionario.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        abaFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        abaCadastrar.setBackground(new java.awt.Color(32, 32, 48));
+        abaCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        abaCadastrar.setText("Cadastrar Funcionário");
+        abaCadastrar.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        abaCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abaFuncionarioActionPerformed(evt);
+                abaCadastrarActionPerformed(evt);
             }
         });
 
+        abaResiduos.setBackground(new java.awt.Color(32, 32, 48));
+        abaResiduos.setForeground(new java.awt.Color(255, 255, 255));
         abaResiduos.setSelected(true);
         abaResiduos.setText("Resíduos");
+        abaResiduos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         abaResiduos.setMargin(new java.awt.Insets(0, 0, 0, 0));
         abaResiduos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +114,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(0, 33, Short.MAX_VALUE)
                 .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(abaFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(abaCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,7 +130,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(abaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(abaCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -297,9 +304,7 @@ public class HomeView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jMain, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE))
+            .addComponent(jMain, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
             .addComponent(barraLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -308,13 +313,22 @@ public class HomeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abaResiduosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaResiduosActionPerformed
-        aba
+        abaSelecionada(true, false);
+        if (abaResiduos.isSelected()) {
+            abaResiduos.setBackground(new java.awt.Color(32,32,48));
+        } else {
+            abaResiduos.setBackground(new java.awt.Color(12, 124, 89));
+        }
     }//GEN-LAST:event_abaResiduosActionPerformed
 
-    private void abaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaFuncionarioActionPerformed
-        jCadastrar.setVisible(true);
-        jResiduos.setVisible(false);
-    }//GEN-LAST:event_abaFuncionarioActionPerformed
+    private void abaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaCadastrarActionPerformed
+        abaSelecionada(false, true);
+        if (abaCadastrar.isSelected()) {
+            abaCadastrar.setBackground(new java.awt.Color(32,32,48));
+        } else {
+            abaCadastrar.setBackground(new java.awt.Color(12, 124, 89));
+        }
+    }//GEN-LAST:event_abaCadastrarActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         try {
@@ -392,7 +406,7 @@ public class HomeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton abaFuncionario;
+    private javax.swing.JToggleButton abaCadastrar;
     private javax.swing.JToggleButton abaResiduos;
     private javax.swing.JPanel barraLateral;
     private javax.swing.JButton btnAdicionar;
