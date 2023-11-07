@@ -1,62 +1,31 @@
 package beans;
 
-import java.util.ArrayList;
-
 public class Empresa {
 
-    private int cnpj;
+    private String cnpj;
     private String nome;
     private String rua;
     private String bairro;
     private String numero;
     private double custoTransporte;
-    ArrayList<Residuo> residuos;
 
     public Empresa() {
     }
 
-    public Empresa(int cnpj, String nome, String rua, String bairro, String numero, double custoTransporte) {
+    public Empresa(String cnpj, String nome, String rua, String bairro, String numero, double custoTransporte) {
         this.cnpj = cnpj;
         this.nome = nome;
         this.rua = rua;
         this.bairro = bairro;
         this.numero = numero;
         this.custoTransporte = custoTransporte;
-    }
-    
-    public void addResiduo(Residuo residuo){
-        residuos.add(residuo);
-    }
-    
-    public void removeResiduo(Residuo residuo) {
-        residuos.remove(residuo);
-    }
-    
-    public int residuoEmpresa(Residuo residuo) {
-        int c = 0;
-        for (Residuo r : this.residuos) {
-            if (r == residuo) {
-                c = this.cnpj;
-            }
-        }
-        return c;
-    }
+    }  
 
-    @Override
-    public String toString() {
-        return "\n CNPJ: " + cnpj +
-        "\n nome: " + nome +
-        "\n rua: " + rua +
-        "\n bairro: " + bairro +
-        "\n numero: " + numero +
-        "\n Custo de Transporte: " + custoTransporte;
-    }
-
-    public int getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(int cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

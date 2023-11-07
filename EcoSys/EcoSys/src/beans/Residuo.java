@@ -4,15 +4,15 @@ public class Residuo {
 
     private int id;
     private String nome;
-    private int quantidade;
+    private double quantidade;
     private double valorVenda;
     private String classe;
-    private int cnpj;
+    private String cnpj;
 
     public Residuo() {
     }
 
-    public Residuo(int id, String nome, int quantidade, double valorVenda, String classe) {
+    public Residuo(int id, String nome, double quantidade, double valorVenda, String classe) {
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
@@ -36,11 +36,11 @@ public class Residuo {
         this.nome = nome;
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -60,21 +60,13 @@ public class Residuo {
         this.classe = classe;
     }
 
-    @Override
-    public String toString() {
-        return "\n nome: " + nome
-                + "\n quantidade: " + quantidade
-                + "\n valorVenda: " + valorVenda
-                + "\n classe: " + classe
-                + "\n empresa: " + cnpj;
-    }
-
-    public int getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(Empresa empresa) {
-        this.cnpj = empresa.residuoEmpresa(this);
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
+   
 }

@@ -7,10 +7,9 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 
 public class ResiduoDAO {
-    private Connection conn;
+    private Connection conn = ConexaoDB.conectar();
 
     public ResiduoDAO() {
-        this.conn = ConexaoDB.conectar();
     }
 
     public void inserir(Residuo residuo) {
@@ -19,10 +18,10 @@ public class ResiduoDAO {
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, residuo.getNome());
-            stmt.setInt(2, residuo.getQuantidade());
+            stmt.setDouble(2, residuo.getQuantidade());
             stmt.setDouble(3, residuo.getValorVenda());
             stmt.setString(4, residuo.getClasse());
-            stmt.setInt(5, residuo.getCnpj());
+            stmt.setString(5, residuo.getCnpj());
             stmt.execute();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir o Resíduo: " + e.getMessage());

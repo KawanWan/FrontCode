@@ -37,8 +37,8 @@ public class FuncionarioDAO {
         try{            
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, funcionario.getNome());
-            stmt.setString(3, funcionario.getSenha());
-            stmt.setString(2, funcionario.getCPF());
+            stmt.setString(2, funcionario.getSenha());
+            stmt.setString(3, funcionario.getCPF());
             stmt.setString(4, funcionario.getData_nasc());
             stmt.execute();
         }catch(Exception e){
