@@ -56,7 +56,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="abaCadastrar" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
                           <Component id="abaResiduos" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
-                          <Component id="abaCadastrar1" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                           <Component id="lblUserName" min="-2" pref="150" max="-2" attributes="0"/>
@@ -77,8 +76,6 @@
                   <Component id="abaResiduos" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="abaCadastrar" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="abaCadastrar1" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -140,24 +137,6 @@
               <Image iconType="3" name="/imgs/Perfil.png"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JToggleButton" name="abaCadastrar1">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="30" green="20" red="20" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Cadastrar Funcion&#xe1;rio"/>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 0, 0, 0]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abaCadastrar1ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

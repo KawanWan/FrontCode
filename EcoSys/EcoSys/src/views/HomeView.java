@@ -87,7 +87,6 @@ public class HomeView extends javax.swing.JFrame {
         abaResiduos = new javax.swing.JToggleButton();
         lblUserName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        abaCadastrar1 = new javax.swing.JToggleButton();
         jMain = new javax.swing.JPanel();
         jCadastrar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -142,17 +141,6 @@ public class HomeView extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Perfil.png"))); // NOI18N
 
-        abaCadastrar1.setBackground(new java.awt.Color(32, 32, 48));
-        abaCadastrar1.setForeground(new java.awt.Color(255, 255, 255));
-        abaCadastrar1.setText("Cadastrar Funcionário");
-        abaCadastrar1.setEnabled(false);
-        abaCadastrar1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        abaCadastrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abaCadastrar1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout barraLateralLayout = new javax.swing.GroupLayout(barraLateral);
         barraLateral.setLayout(barraLateralLayout);
         barraLateralLayout.setHorizontalGroup(
@@ -162,8 +150,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(abaCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(abaCadastrar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1))))
@@ -179,8 +166,6 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(abaCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(abaCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -446,10 +431,6 @@ public class HomeView extends javax.swing.JFrame {
         cadResiduo.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void abaCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaCadastrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_abaCadastrar1ActionPerformed
-
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         new ResiduoDAO().excluir(idSelecionado);
 
@@ -495,7 +476,6 @@ public class HomeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton abaCadastrar;
-    private javax.swing.JToggleButton abaCadastrar1;
     private javax.swing.JToggleButton abaResiduos;
     private javax.swing.JPanel barraLateral;
     private javax.swing.JButton btnCadastrar;
