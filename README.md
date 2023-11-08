@@ -62,7 +62,7 @@ Link para teste da versão disponibilizada.
 ## Como rodar a aplicação 
 Baixe a útlima versão disponível na aba (realese)[https://github.com/KawanWan/FrontCode/releases/tag/beta] e em seguida execute o script sql disponível na pasta 'db' utilizando o Workbench, PHPMyAdmin, Console ou meio preferível, tenha certeza que o MySQL esteja instalado e em execução em sua máquina. Após isso, execute o App.java e o sistema deverá estar funcionando.
 ## Testes realizados
-Utilização de imagens e descrição do qeu foi testado.
+Utilização de imagens e descrição do que foi testado.
 
 ## Banco de Dados 🗂️
 Caso tenha acesso a uma base de dados, deixe a descrição do arquivo (json, csv, xml e etc).
