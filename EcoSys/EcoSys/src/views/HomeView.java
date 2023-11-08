@@ -5,33 +5,67 @@
 package views;
 
 import beans.Funcionario;
+import beans.Residuo;
 import dao.FuncionarioDAO;
+import dao.ResiduoDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import utils.TableModelCreator;
 
 /**
  *
  * @author ciceroaon
  */
 public class HomeView extends javax.swing.JFrame {
+
     private String nomeUsuario;
+    private int idSelecionado;
+    private Residuo residuoSelecionado = null;
+
     /**
      * Creates new form HomeView
      */
-
     /**
      * Creates new form HomeView
      */
     public HomeView() {
         initComponents();
+
+        atualizarTabela();
+        mudaEstadoBotoes(false);
     }
-    
+
+    public Residuo getResiduoSelecionado() {
+        return residuoSelecionado;
+    }
+
+    public void atualizarTabela() {
+        try {
+            List<Residuo> lstResiduos = new ResiduoDAO().getAll();
+
+            TableModel tableModelProdutos = TableModelCreator.createTableModel(Residuo.class, lstResiduos, null);
+            tbResiduos.setModel(tableModelProdutos);
+            mudaEstadoBotoes(false);
+        } catch (Exception e) {
+            System.out.println("Houve um erro ao tentar popular a tabela");
+        }
+    }
+
+    private void mudaEstadoBotoes(boolean novoEstado) {
+        btnEditar.setEnabled(novoEstado);
+        btnExcluir.setEnabled(novoEstado);
+    }
+
     public void setUsuario(String nome) {
         this.nomeUsuario = nome;
     }
+
     public String getUsuario() {
         return nomeUsuario;
     }
-    
+
     public void abaSelecionada(boolean residuos, boolean cadastrar) {
         jResiduos.setVisible(residuos);
         abaResiduos.setSelected(residuos);
@@ -53,6 +87,7 @@ public class HomeView extends javax.swing.JFrame {
         abaResiduos = new javax.swing.JToggleButton();
         lblUserName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        abaCadastrar1 = new javax.swing.JToggleButton();
         jMain = new javax.swing.JPanel();
         jCadastrar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -107,6 +142,17 @@ public class HomeView extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Perfil.png"))); // NOI18N
 
+        abaCadastrar1.setBackground(new java.awt.Color(32, 32, 48));
+        abaCadastrar1.setForeground(new java.awt.Color(255, 255, 255));
+        abaCadastrar1.setText("Cadastrar Funcionário");
+        abaCadastrar1.setEnabled(false);
+        abaCadastrar1.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        abaCadastrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaCadastrar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout barraLateralLayout = new javax.swing.GroupLayout(barraLateral);
         barraLateral.setLayout(barraLateralLayout);
         barraLateralLayout.setHorizontalGroup(
@@ -116,7 +162,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(abaCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(abaCadastrar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1))))
@@ -130,8 +177,10 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(lblUserName)
                 .addGap(25, 25, 25)
                 .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(abaCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(abaCadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -243,6 +292,11 @@ public class HomeView extends javax.swing.JFrame {
         jResiduos.setOpaque(false);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -260,13 +314,10 @@ public class HomeView extends javax.swing.JFrame {
 
         tbResiduos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Nome", "Quantidade", "Valor de Venda"
+
             }
         ));
         jScrollPane1.setViewportView(tbResiduos);
@@ -326,7 +377,7 @@ public class HomeView extends javax.swing.JFrame {
     private void abaResiduosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaResiduosActionPerformed
         abaSelecionada(true, false);
         if (abaResiduos.isSelected()) {
-            abaResiduos.setBackground(new java.awt.Color(32,32,48));
+            abaResiduos.setBackground(new java.awt.Color(32, 32, 48));
         } else {
             abaResiduos.setBackground(new java.awt.Color(12, 124, 89));
         }
@@ -335,7 +386,7 @@ public class HomeView extends javax.swing.JFrame {
     private void abaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaCadastrarActionPerformed
         abaSelecionada(false, true);
         if (abaCadastrar.isSelected()) {
-            abaCadastrar.setBackground(new java.awt.Color(32,32,48));
+            abaCadastrar.setBackground(new java.awt.Color(32, 32, 48));
         } else {
             abaCadastrar.setBackground(new java.awt.Color(12, 124, 89));
         }
@@ -364,7 +415,7 @@ public class HomeView extends javax.swing.JFrame {
                 pssSenha.setText("");
                 pssCSenha.setText("");
 
-                if (funcionario.getIdFuncionario() != 0){
+                if (funcionario.getIdFuncionario() != 0) {
                     JOptionPane.showMessageDialog(null, "Funcionário cadastrado! ID cadastrado é: " + funcionario.getIdFuncionario());
                 }
 
@@ -382,13 +433,30 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        residuoSelecionado = new ResiduoDAO().getByID(idSelecionado);
+
+        fCadResiduo1 cadResiduo = new fCadResiduo1(this, true, this);
+        cadResiduo.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        fCadResiduo cadResiduo = new fCadResiduo();
+        residuoSelecionado = null;
+
+        fCadResiduo1 cadResiduo = new fCadResiduo1(this, true, this);
         cadResiduo.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void abaCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaCadastrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abaCadastrar1ActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        new ResiduoDAO().excluir(idSelecionado);
+
+        atualizarTabela();
+
+        mudaEstadoBotoes(false);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,6 +495,7 @@ public class HomeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton abaCadastrar;
+    private javax.swing.JToggleButton abaCadastrar1;
     private javax.swing.JToggleButton abaResiduos;
     private javax.swing.JPanel barraLateral;
     private javax.swing.JButton btnCadastrar;

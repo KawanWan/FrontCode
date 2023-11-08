@@ -4,18 +4,43 @@
  */
 package views;
 
-/**
- *
- * @author kawan
- */
-public class fCadResiduo extends javax.swing.JDialog {
+import beans.Residuo;
+import dao.ResiduoDAO;
+import javax.swing.JOptionPane;
 
-    /**
-     * Creates new form fCadResiduo
-     */
-    public fCadResiduo(java.awt.Frame parent, boolean modal) {
+public class fCadResiduo1 extends javax.swing.JDialog {
+
+    private Residuo res;
+    HomeView main;
+    boolean isEditar = false;
+
+    public fCadResiduo1(java.awt.Frame parent, boolean modal, HomeView main) {
         super(parent, modal);
         initComponents();
+
+        this.main = main;
+
+        if (main.getResiduoSelecionado() != null) {
+            isEditar = true;
+            this.res = main.getResiduoSelecionado();
+            popularForm();
+        }
+    }
+
+    private void popularForm() {
+        txtNome.setText(res.getNome());
+        txtQtd.setText(String.valueOf(res.getQuantidade()));
+        txtValorVenda.setText(String.valueOf(res.getValorVenda()));
+        txtClasse.setText(res.getClasse());
+        txtCnpj.setText(res.getCnpj());
+    }
+
+    private void resetForm() {
+        txtNome.setText("");
+        txtQtd.setText("");
+        txtValorVenda.setText("");
+        txtClasse.setText("");
+        txtCnpj.setText("");
     }
 
     /**
@@ -183,7 +208,46 @@ public class fCadResiduo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtClasseActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-       
+        try {
+            String nome = txtNome.getText();
+            double qtd = Double.parseDouble(txtQtd.getText());
+            double vVenda = Double.parseDouble(txtValorVenda.getText());
+            String classe = txtClasse.getText();
+            String cnpj = txtCnpj.getText();
+
+            if (isEditar) {
+                res = new Residuo(res.getId(), nome, qtd, vVenda, classe, cnpj);
+                new ResiduoDAO().editar(res);
+                dispose();
+            } else {
+                res = new Residuo(0, nome, qtd, vVenda, classe, cnpj);
+                new ResiduoDAO().inserir(res);
+                resetForm();
+            }
+
+            /*Residuo resid = new Residuo();
+            resid.setNome(nome);
+            resid.setQuantidade(qtd);
+            resid.setValorVenda(vVenda);
+            resid.setClasse(classe);
+            resid.setCnpj(cnpj);
+
+            ResiduoDAO rDao = new ResiduoDAO();
+            rDao.inserir(resid);
+
+            txtNome.setText("");
+            txtQtd.setText("");
+            txtValorVenda.setText("");
+            txtClasse.setText("");
+            txtCnpj.setText("");
+             */
+            if (res.getId() != 0) {
+                JOptionPane.showMessageDialog(null, "Resíduo cadastrado! ID cadastrado é: " + res.getId());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o Resíduo: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -217,23 +281,32 @@ public class fCadResiduo extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fCadResiduo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fCadResiduo1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fCadResiduo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fCadResiduo1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fCadResiduo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fCadResiduo1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fCadResiduo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fCadResiduo1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                fCadResiduo dialog = new fCadResiduo(new javax.swing.JFrame(), true);
+                fCadResiduo1 dialog = new fCadResiduo1(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

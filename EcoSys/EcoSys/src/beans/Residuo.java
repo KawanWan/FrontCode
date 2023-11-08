@@ -12,12 +12,13 @@ public class Residuo {
     public Residuo() {
     }
 
-    public Residuo(int id, String nome, double quantidade, double valorVenda, String classe) {
+    public Residuo(int id, String nome, double quantidade, double valorVenda, String classe, String cnpj) {
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
         this.valorVenda = valorVenda;
         this.classe = classe;
+        this.cnpj = cnpj;
     }
 
     public int getId() {
