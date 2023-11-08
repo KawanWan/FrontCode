@@ -4,9 +4,15 @@
  */
 package views;
 
-import beans.Funcionario;
-import dao.FuncionarioDAO;
+import beans.Residuo;
+import dao.ResiduoDAO;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import utils.TableModelCreator;
 
 /**
  *
@@ -14,6 +20,12 @@ import javax.swing.JOptionPane;
  */
 public class HomeView extends javax.swing.JFrame {
     private String nomeUsuario;
+    private int idSelecionado;
+    private Residuo residuoSelecionado = null;
+
+    public Residuo getResiduoSelecionado() {
+        return residuoSelecionado;
+    }
     /**
      * Creates new form HomeView
      */
@@ -23,6 +35,9 @@ public class HomeView extends javax.swing.JFrame {
      */
     public HomeView() {
         initComponents();
+        
+        atualizarTabela();
+        botaoHabilitado(false);
     }
     
     public void setUsuario(String nome) {
@@ -32,11 +47,27 @@ public class HomeView extends javax.swing.JFrame {
         return nomeUsuario;
     }
     
+    public void botaoHabilitado(boolean habilitar) {
+        btnEditar.setEnabled(habilitar);
+        btnExcluir.setEnabled(habilitar);
+    }
     public void abaSelecionada(boolean residuos, boolean cadastrar) {
         jResiduos.setVisible(residuos);
         abaResiduos.setSelected(residuos);
         jCadastrar.setVisible(cadastrar);
         abaCadastrar.setSelected(cadastrar);
+    }
+    
+    public final void atualizarTabela() {
+        try {
+            ArrayList<Residuo> residuoDB = new ResiduoDAO().mostrarTodos();
+            List<String> ordemColunas = Arrays.asList("id","nome", "quantidade", "valorVenda", "classe", "empresa_CNPJ");
+            
+            TableModel tableModelResiduos = TableModelCreator.createTableModel(Residuo.class, residuoDB, ordemColunas);
+            tbResiduos.setModel(tableModelResiduos);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao tentar popular a tabela! "+e);
+        }
     }
 
     /**
@@ -54,9 +85,15 @@ public class HomeView extends javax.swing.JFrame {
         lblUserName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMain = new javax.swing.JPanel();
+        jResiduos = new javax.swing.JPanel();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbResiduos = new javax.swing.JTable();
         jCadastrar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        btnCadastro = new javax.swing.JButton();
+        btnCadastrarFunc = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         pssCSenha = new javax.swing.JPasswordField();
         pssSenha = new javax.swing.JPasswordField();
@@ -67,15 +104,10 @@ public class HomeView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jResiduos = new javax.swing.JPanel();
-        btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnCadastrar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbResiduos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Descarte Consciente");
+        setResizable(false);
 
         barraLateral.setBackground(new java.awt.Color(57, 48, 74));
 
@@ -130,9 +162,9 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(lblUserName)
                 .addGap(25, 25, 25)
                 .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(abaCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
 
         jMain.setBackground(new java.awt.Color(32, 32, 48));
@@ -143,16 +175,90 @@ public class HomeView extends javax.swing.JFrame {
         jMain.setPreferredSize(new java.awt.Dimension(600, 430));
         jMain.setLayout(new java.awt.CardLayout());
 
+        jResiduos.setOpaque(false);
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        tbResiduos.setBackground(new java.awt.Color(250, 250, 250));
+        tbResiduos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Quantidade", "Valor de Venda"
+            }
+        ));
+        tbResiduos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbResiduosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbResiduos);
+
+        javax.swing.GroupLayout jResiduosLayout = new javax.swing.GroupLayout(jResiduos);
+        jResiduos.setLayout(jResiduosLayout);
+        jResiduosLayout.setHorizontalGroup(
+            jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jResiduosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jResiduosLayout.createSequentialGroup()
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jResiduosLayout.setVerticalGroup(
+            jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jResiduosLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jMain.add(jResiduos, "card2");
+
         jCadastrar.setOpaque(false);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cadastro de Funcionários");
 
-        btnCadastro.setText("Cadastrar");
-        btnCadastro.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarFunc.setText("Cadastrar");
+        btnCadastrarFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastroActionPerformed(evt);
+                btnCadastrarFuncActionPerformed(evt);
             }
         });
 
@@ -185,7 +291,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jCadastrarLayout.createSequentialGroup()
                         .addGap(199, 199, 199)
-                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCadastrarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jCadastrarLayout.createSequentialGroup()
                         .addGap(141, 141, 141)
                         .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,81 +340,18 @@ public class HomeView extends javax.swing.JFrame {
                     .addComponent(pssCSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(83, 83, 83)
-                .addComponent(btnCadastro)
+                .addComponent(btnCadastrarFunc)
                 .addGap(140, 140, 140))
         );
 
         jMain.add(jCadastrar, "card3");
-
-        jResiduos.setOpaque(false);
-
-        btnExcluir.setText("Excluir");
-
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
-
-        tbResiduos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nome", "Quantidade", "Valor de Venda"
-            }
-        ));
-        jScrollPane1.setViewportView(tbResiduos);
-
-        javax.swing.GroupLayout jResiduosLayout = new javax.swing.GroupLayout(jResiduos);
-        jResiduos.setLayout(jResiduosLayout);
-        jResiduosLayout.setHorizontalGroup(
-            jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jResiduosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jResiduosLayout.createSequentialGroup()
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jResiduosLayout.setVerticalGroup(
-            jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jResiduosLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jMain.add(jResiduos, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(barraLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jMain, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -341,54 +384,50 @@ public class HomeView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_abaCadastrarActionPerformed
 
-    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        try {
-            String nome = txtNome.getText();
-            String cpf = txtCpf.getText();
-            String datanasc = txtDataNasc.getText();
-            if (pssSenha.getText().equals(pssCSenha.getText())) {
-                String senha = pssSenha.getText();
-
-                Funcionario funcionario = new Funcionario();
-                funcionario.setNome(nome);
-                funcionario.setCPF(cpf);
-                funcionario.setData_nasc(datanasc);
-                funcionario.setSenha(senha);
-
-                FuncionarioDAO fdao = new FuncionarioDAO();
-                fdao.inserir(funcionario);
-
-                txtNome.setText("");
-                txtCpf.setText("");
-                txtDataNasc.setText("");
-                pssSenha.setText("");
-                pssCSenha.setText("");
-
-                if (funcionario.getIdFuncionario() != 0){
-                    JOptionPane.showMessageDialog(null, "Funcionário cadastrado! ID cadastrado é: " + funcionario.getIdFuncionario());
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "As senhas não coincidem: ");
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o funcionário: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnCadastroActionPerformed
+    private void btnCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncActionPerformed
+        
+    }//GEN-LAST:event_btnCadastrarFuncActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        residuoSelecionado = new ResiduoDAO().getById(idSelecionado);
+        
+        fEditResiduo editResiduo = new fEditResiduo(this, true, this);
+        editResiduo.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        fCadResiduo cadResiduo = new fCadResiduo();
+        fCadResiduo cadResiduo = new fCadResiduo(this, true, this);
         cadResiduo.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void tbResiduosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResiduosMouseClicked
+        JTable source = (JTable) evt.getSource();
+        
+        int row = source.rowAtPoint( evt.getPoint() );
+        int column = tbResiduos.convertColumnIndexToView(tbResiduos.getColumn("Id ").getModelIndex());
+        
+        String s = source.getModel().getValueAt(row, column).toString();
+        
+        idSelecionado = Integer.parseInt(s);
+        System.out.println(idSelecionado);
+        
+        botaoHabilitado(true);
+    }//GEN-LAST:event_tbResiduosMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        boolean excluir = new ResiduoDAO().excluir(idSelecionado);
+        
+        if (excluir) {
+            JOptionPane.showMessageDialog(rootPane, "Resíduo excluído com sucesso.");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Não foi possível excluir o resíduo!");
+        }
+        atualizarTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,7 +469,7 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JToggleButton abaResiduos;
     private javax.swing.JPanel barraLateral;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnCadastro;
+    private javax.swing.JButton btnCadastrarFunc;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JPanel jCadastrar;

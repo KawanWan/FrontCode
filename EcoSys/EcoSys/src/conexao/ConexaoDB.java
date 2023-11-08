@@ -11,7 +11,7 @@ public class ConexaoDB {
         try{
             String url = "jdbc:mysql://localhost:3306/BancoLixoEletronico";
             String usuario = "root";
-            String senha = "";
+            String senha = "Cthulhu#23$";
             
             conn = DriverManager.getConnection(url, usuario, senha);
             
