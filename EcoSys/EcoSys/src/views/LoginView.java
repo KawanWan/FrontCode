@@ -158,7 +158,7 @@ public class LoginView extends javax.swing.JFrame {
             HomeView home = new HomeView();
             home.setUsuario(login);
             home.setVisible(true);
-            home.abaSelecionada(true, false);
+            home.abaSelecionada(true, false, false);
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Usuário ou senha inválida!", "Erro!", ERROR_MESSAGE);

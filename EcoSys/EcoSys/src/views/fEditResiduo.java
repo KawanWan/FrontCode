@@ -4,8 +4,11 @@
  */
 package views;
 
+import beans.Empresa;
 import beans.Residuo;
+import dao.EmpresaDAO;
 import dao.ResiduoDAO;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
@@ -39,7 +42,7 @@ public class fEditResiduo extends javax.swing.JDialog {
             txtQtd.setText(String.valueOf(r.getQuantidade()));
             txtValorVenda.setText(String.valueOf(r.getValorVenda()));
             txtClasse.setText(r.getClasse());
-            txtCnpj.setText(r.getCnpj());
+            
         } else {
             JOptionPane.showMessageDialog(this, "Resíduo não encontrado!");
         }
@@ -50,7 +53,6 @@ public class fEditResiduo extends javax.swing.JDialog {
         txtQtd.setText("");
         txtValorVenda.setText("");
         txtClasse.setText("");
-        txtCnpj.setText("");
     }
 
     /**
@@ -71,10 +73,10 @@ public class fEditResiduo extends javax.swing.JDialog {
         btnSalvar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtValorVenda = new javax.swing.JTextField();
-        txtCnpj = new javax.swing.JTextField();
         txtClasse = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        cmbEmpresa = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -121,12 +123,6 @@ public class fEditResiduo extends javax.swing.JDialog {
             }
         });
 
-        txtCnpj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCnpjActionPerformed(evt);
-            }
-        });
-
         txtClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtClasseActionPerformed(evt);
@@ -137,14 +133,24 @@ public class fEditResiduo extends javax.swing.JDialog {
 
         jLabel3.setText("Quantidade:");
 
+        cmbEmpresa.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cmbEmpresaAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -155,11 +161,11 @@ public class fEditResiduo extends javax.swing.JDialog {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtClasse, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(cmbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -192,10 +198,10 @@ public class fEditResiduo extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addComponent(txtClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73)
+                    .addComponent(cmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67)
                 .addComponent(btnSalvar)
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -207,9 +213,9 @@ public class fEditResiduo extends javax.swing.JDialog {
             .addGap(0, 500, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 15, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 16, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,15 +245,12 @@ public class fEditResiduo extends javax.swing.JDialog {
             double qtd = Double.parseDouble(txtQtd.getText());
             double vVenda = Double.parseDouble(txtValorVenda.getText());
             String classe = txtClasse.getText();
-            String cnpj = txtCnpj.getText();
+            //String cnpj = txtCnpj.getText();            
+            Empresa emp = (Empresa) this.cmbEmpresa.getSelectedItem();
 
-            Residuo editado = new Residuo();
+            Residuo editado = new Residuo(nome, qtd, vVenda, classe, emp.getCnpj());
+            
             editado.setId(r.getId());
-            editado.setNome(nome);
-            editado.setQuantidade(qtd);
-            editado.setValorVenda(vVenda);
-            editado.setClasse(classe);
-            editado.setCnpj(cnpj);
 
             ResiduoDAO rDao = new ResiduoDAO();
             rDao.update(editado);
@@ -256,9 +259,8 @@ public class fEditResiduo extends javax.swing.JDialog {
             txtQtd.setText("");
             txtValorVenda.setText("");
             txtClasse.setText("");
-            txtCnpj.setText("");
 
-            JOptionPane.showMessageDialog(this, "Resíduo cadastrado! ID cadastrado é: " + editado.getId());
+            JOptionPane.showMessageDialog(this, "Resíduo Alterado!");
 
         }catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Não foi possível cadastrar o Resíduo: " + e.getMessage());
@@ -269,10 +271,6 @@ public class fEditResiduo extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorVendaActionPerformed
 
-    private void txtCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCnpjActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCnpjActionPerformed
-
     private void txtClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClasseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClasseActionPerformed
@@ -281,6 +279,18 @@ public class fEditResiduo extends javax.swing.JDialog {
         limparForm();
         main.atualizarTabela();
     }//GEN-LAST:event_formWindowClosed
+
+    private void cmbEmpresaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cmbEmpresaAncestorAdded
+        // TODO add your handling code here:
+        EmpresaDAO empDAO = new EmpresaDAO();
+        ArrayList<Empresa> empresas = empDAO.selecionar();
+
+        cmbEmpresa.removeAll();
+
+        for (Empresa e : empresas) {
+            this.cmbEmpresa.addItem(e);
+        }
+    }//GEN-LAST:event_cmbEmpresaAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -327,6 +337,7 @@ public class fEditResiduo extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox cmbEmpresa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -335,7 +346,6 @@ public class fEditResiduo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtClasse;
-    private javax.swing.JTextField txtCnpj;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtQtd;
     private javax.swing.JTextField txtValorVenda;

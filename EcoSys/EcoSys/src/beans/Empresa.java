@@ -68,4 +68,9 @@ public class Empresa {
     public void setCustoTransporte(double custoTransporte) {
         this.custoTransporte = custoTransporte;
     }
+    
+    @Override
+    public String toString(){
+        return getNome();
+    }
 }

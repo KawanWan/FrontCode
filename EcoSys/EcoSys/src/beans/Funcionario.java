@@ -1,11 +1,26 @@
-
 package beans;
 
 public class Funcionario {
     private int idFuncionario;
     private String CPF, nome, senha, data_nasc;
-    
-    
+
+    public Funcionario(int idFuncionario, String CPF, String nome, String senha, String data_nasc) {
+        this.idFuncionario = idFuncionario;
+        this.CPF = CPF;
+        this.nome = nome;
+        this.senha = senha;
+        this.data_nasc = data_nasc;
+    }
+
+    public Funcionario() {
+    }
+
+    public Funcionario(String CPF, String nome, String senha, String data_nasc) {
+        this.CPF = CPF;
+        this.nome = nome;
+        this.senha = senha;
+        this.data_nasc = data_nasc;
+    }
 
     public int getIdFuncionario() {
         return idFuncionario;

@@ -4,7 +4,11 @@
  */
 package views;
 
+import beans.Empresa;
+import beans.Funcionario;
 import beans.Residuo;
+import dao.EmpresaDAO;
+import dao.FuncionarioDAO;
 import dao.ResiduoDAO;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +23,7 @@ import utils.TableModelCreator;
  * @author ciceroaon
  */
 public class HomeView extends javax.swing.JFrame {
+
     private String nomeUsuario;
     private int idSelecionado;
     private Residuo residuoSelecionado = null;
@@ -26,47 +31,51 @@ public class HomeView extends javax.swing.JFrame {
     public Residuo getResiduoSelecionado() {
         return residuoSelecionado;
     }
+
     /**
      * Creates new form HomeView
      */
-
     /**
      * Creates new form HomeView
      */
     public HomeView() {
         initComponents();
-        
+
         atualizarTabela();
         botaoHabilitado(false);
     }
-    
+
     public void setUsuario(String nome) {
         this.nomeUsuario = nome;
     }
+
     public String getUsuario() {
         return nomeUsuario;
     }
-    
+
     public void botaoHabilitado(boolean habilitar) {
         btnEditar.setEnabled(habilitar);
         btnExcluir.setEnabled(habilitar);
     }
-    public void abaSelecionada(boolean residuos, boolean cadastrar) {
+
+    public void abaSelecionada(boolean residuos, boolean cadastrar, boolean empresas) {
         jResiduos.setVisible(residuos);
         abaResiduos.setSelected(residuos);
         jCadastrar.setVisible(cadastrar);
         abaCadastrar.setSelected(cadastrar);
+        jCadEmpresa.setVisible(empresas);
+        abaEmpresas.setSelected(empresas);
     }
-    
+
     public final void atualizarTabela() {
         try {
             ArrayList<Residuo> residuoDB = new ResiduoDAO().mostrarTodos();
-            List<String> ordemColunas = Arrays.asList("id","nome", "quantidade", "valorVenda", "classe", "empresa_CNPJ");
-            
+            List<String> ordemColunas = Arrays.asList("id", "nome", "quantidade", "valorVenda", "classe", "empresa_CNPJ");
+
             TableModel tableModelResiduos = TableModelCreator.createTableModel(Residuo.class, residuoDB, ordemColunas);
             tbResiduos.setModel(tableModelResiduos);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao tentar popular a tabela! "+e);
+            JOptionPane.showMessageDialog(rootPane, "Erro ao tentar popular a tabela! " + e);
         }
     }
 
@@ -84,6 +93,7 @@ public class HomeView extends javax.swing.JFrame {
         abaResiduos = new javax.swing.JToggleButton();
         lblUserName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        abaEmpresas = new javax.swing.JToggleButton();
         jMain = new javax.swing.JPanel();
         jResiduos = new javax.swing.JPanel();
         btnExcluir = new javax.swing.JButton();
@@ -104,6 +114,21 @@ public class HomeView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jCadEmpresa = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtCnpj = new javax.swing.JTextField();
+        txtNomeEmpresa = new javax.swing.JTextField();
+        txtRua = new javax.swing.JTextField();
+        txtBairro = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
+        txtCustoTransporte = new javax.swing.JTextField();
+        btnCadastrarEmpresa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Descarte Consciente");
@@ -139,6 +164,18 @@ public class HomeView extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Perfil.png"))); // NOI18N
 
+        abaEmpresas.setBackground(new java.awt.Color(32, 32, 48));
+        abaEmpresas.setForeground(new java.awt.Color(255, 255, 255));
+        abaEmpresas.setSelected(true);
+        abaEmpresas.setText("Empresas");
+        abaEmpresas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        abaEmpresas.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        abaEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaEmpresasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout barraLateralLayout = new javax.swing.GroupLayout(barraLateral);
         barraLateral.setLayout(barraLateralLayout);
         barraLateralLayout.setHorizontalGroup(
@@ -148,7 +185,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(abaCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(abaEmpresas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1))))
@@ -162,6 +200,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addComponent(lblUserName)
                 .addGap(25, 25, 25)
                 .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(abaEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(abaCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -346,6 +386,105 @@ public class HomeView extends javax.swing.JFrame {
 
         jMain.add(jCadastrar, "card3");
 
+        jCadEmpresa.setOpaque(false);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Cadastro de Empresas");
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("CNPJ:");
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Nome:");
+
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Rua:");
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Bairro:");
+
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Número:");
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Custo de Transporte:");
+
+        btnCadastrarEmpresa.setText("Cadastrar");
+        btnCadastrarEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarEmpresaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jCadEmpresaLayout = new javax.swing.GroupLayout(jCadEmpresa);
+        jCadEmpresa.setLayout(jCadEmpresaLayout);
+        jCadEmpresaLayout.setHorizontalGroup(
+            jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCadEmpresaLayout.createSequentialGroup()
+                .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jCadEmpresaLayout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(jLabel9))
+                    .addGroup(jCadEmpresaLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtRua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                                .addComponent(txtCnpj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNumero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNomeEmpresa, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCustoTransporte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jCadEmpresaLayout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(btnCadastrarEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(131, Short.MAX_VALUE))
+        );
+        jCadEmpresaLayout.setVerticalGroup(
+            jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCadEmpresaLayout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel9)
+                .addGap(58, 58, 58)
+                .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtNomeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtCustoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addComponent(btnCadastrarEmpresa)
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
+        jMain.add(jCadEmpresa, "card4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -367,25 +506,57 @@ public class HomeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abaResiduosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaResiduosActionPerformed
-        abaSelecionada(true, false);
+        abaSelecionada(true, false, false);
         if (abaResiduos.isSelected()) {
-            abaResiduos.setBackground(new java.awt.Color(32,32,48));
+            abaResiduos.setBackground(new java.awt.Color(32, 32, 48));
         } else {
             abaResiduos.setBackground(new java.awt.Color(12, 124, 89));
         }
     }//GEN-LAST:event_abaResiduosActionPerformed
 
     private void abaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaCadastrarActionPerformed
-        abaSelecionada(false, true);
+        abaSelecionada(false, true, false);
         if (abaCadastrar.isSelected()) {
-            abaCadastrar.setBackground(new java.awt.Color(32,32,48));
+            abaCadastrar.setBackground(new java.awt.Color(32, 32, 48));
         } else {
             abaCadastrar.setBackground(new java.awt.Color(12, 124, 89));
         }
     }//GEN-LAST:event_abaCadastrarActionPerformed
 
     private void btnCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncActionPerformed
-        
+        try {
+            String nome = txtNome.getText();
+            String cpf = txtCpf.getText();
+            String datanasc = txtDataNasc.getText();
+            if (pssSenha.getText().equals(pssCSenha.getText())) {
+                String senha = pssSenha.getText();
+
+                Funcionario funcionario = new Funcionario();
+                funcionario.setNome(nome);
+                funcionario.setCPF(cpf);
+                funcionario.setData_nasc(datanasc);
+                funcionario.setSenha(senha);
+
+                FuncionarioDAO fdao = new FuncionarioDAO();
+                fdao.inserir(funcionario);
+
+                txtNome.setText("");
+                txtCpf.setText("");
+                txtDataNasc.setText("");
+                pssSenha.setText("");
+                pssCSenha.setText("");
+
+                if (funcionario != null) {
+                    JOptionPane.showMessageDialog(null, "Funcionário cadastrado!");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "As senhas não coincidem: ");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o funcionário: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnCadastrarFuncActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -394,7 +565,7 @@ public class HomeView extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         residuoSelecionado = new ResiduoDAO().getById(idSelecionado);
-        
+
         fEditResiduo editResiduo = new fEditResiduo(this, true, this);
         editResiduo.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -404,23 +575,9 @@ public class HomeView extends javax.swing.JFrame {
         cadResiduo.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void tbResiduosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResiduosMouseClicked
-        JTable source = (JTable) evt.getSource();
-        
-        int row = source.rowAtPoint( evt.getPoint() );
-        int column = tbResiduos.convertColumnIndexToView(tbResiduos.getColumn("Id ").getModelIndex());
-        
-        String s = source.getModel().getValueAt(row, column).toString();
-        
-        idSelecionado = Integer.parseInt(s);
-        System.out.println(idSelecionado);
-        
-        botaoHabilitado(true);
-    }//GEN-LAST:event_tbResiduosMouseClicked
-
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         boolean excluir = new ResiduoDAO().excluir(idSelecionado);
-        
+
         if (excluir) {
             JOptionPane.showMessageDialog(rootPane, "Resíduo excluído com sucesso.");
         } else {
@@ -428,6 +585,67 @@ public class HomeView extends javax.swing.JFrame {
         }
         atualizarTabela();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void abaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaEmpresasActionPerformed
+        // TODO add your handling code here:
+        abaSelecionada(false, false, true);
+        if (abaEmpresas.isSelected()) {
+            abaEmpresas.setBackground(new java.awt.Color(32, 32, 48));
+        } else {
+            abaEmpresas.setBackground(new java.awt.Color(12, 124, 89));
+        }
+    }//GEN-LAST:event_abaEmpresasActionPerformed
+
+    private void tbResiduosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResiduosMouseClicked
+        JTable source = (JTable) evt.getSource();
+
+        int row = source.rowAtPoint(evt.getPoint());
+        int column = tbResiduos.convertColumnIndexToView(tbResiduos.getColumn("Id ").getModelIndex());
+
+        String s = source.getModel().getValueAt(row, column).toString();
+
+        idSelecionado = Integer.parseInt(s);
+        System.out.println(idSelecionado);
+
+        botaoHabilitado(true);
+    }//GEN-LAST:event_tbResiduosMouseClicked
+
+    private void btnCadastrarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEmpresaActionPerformed
+        // TODO add your handling code here:
+        try {
+            String cnpj = txtCnpj.getText();
+            String nome = txtNomeEmpresa.getText();
+            String rua = txtRua.getText();
+            String bairro = txtBairro.getText();
+            String num = txtNumero.getText();
+            double custoT = Double.parseDouble(txtCustoTransporte.getText());
+
+            Empresa empresa = new Empresa();
+            empresa.setCnpj(cnpj);
+            empresa.setNome(nome);
+            empresa.setRua(rua);
+            empresa.setBairro(bairro);
+            empresa.setNumero(num);
+            empresa.setCustoTransporte(custoT);
+
+            EmpresaDAO edao = new EmpresaDAO();
+            edao.inserir(empresa);
+
+            txtCnpj.setText("");
+            txtNomeEmpresa.setText("");
+            txtRua.setText("");
+            txtBairro.setText("");
+            txtNumero.setText("");
+            txtCustoTransporte.setText("");
+
+            if (empresa != null) {
+                JOptionPane.showMessageDialog(null, "Empresa cadastrada!");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível cadastrar a empresa: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnCadastrarEmpresaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,20 +684,30 @@ public class HomeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton abaCadastrar;
+    private javax.swing.JToggleButton abaEmpresas;
     private javax.swing.JToggleButton abaResiduos;
     private javax.swing.JPanel barraLateral;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCadastrarEmpresa;
     private javax.swing.JButton btnCadastrarFunc;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JPanel jCadEmpresa;
     private javax.swing.JPanel jCadastrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jMain;
     private javax.swing.JPanel jResiduos;
     private javax.swing.JScrollPane jScrollPane1;
@@ -487,8 +715,14 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JPasswordField pssCSenha;
     private javax.swing.JPasswordField pssSenha;
     private javax.swing.JTable tbResiduos;
+    private javax.swing.JTextField txtBairro;
+    private javax.swing.JTextField txtCnpj;
     private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtCustoTransporte;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNomeEmpresa;
+    private javax.swing.JTextField txtNumero;
+    private javax.swing.JTextField txtRua;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,6 +20,16 @@ public class Residuo {
         this.classe = classe;
     }
 
+    public Residuo(String nome, double quantidade, double valorVenda, String classe, String cnpj) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.valorVenda = valorVenda;
+        this.classe = classe;
+        this.cnpj = cnpj;
+    }
+    
+    
+
     public int getId() {
         return id;
     }
