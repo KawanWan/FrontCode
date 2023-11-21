@@ -10,12 +10,14 @@ import beans.Residuo;
 import dao.EmpresaDAO;
 import dao.FuncionarioDAO;
 import dao.ResiduoDAO;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
+import javax.swing.text.MaskFormatter;
 import utils.TableModelCreator;
 
 /**
@@ -43,6 +45,8 @@ public class HomeView extends javax.swing.JFrame {
 
         atualizarTabela();
         botaoHabilitado(false);
+        formatarData();
+        formatarCpf();
     }
 
     public void setUsuario(String nome) {
@@ -79,6 +83,23 @@ public class HomeView extends javax.swing.JFrame {
         }
     }
 
+    private void formatarData() {
+        try {
+            MaskFormatter mask = new MaskFormatter("##/##/####");
+            mask.install(txtDataNasc);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao formatar o campo de texto", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void formatarCpf() {
+        try {
+            MaskFormatter mask = new MaskFormatter("#########-##");
+            mask.install(txtCpf);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao formatar o campo de texto", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,13 +128,13 @@ public class HomeView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         pssCSenha = new javax.swing.JPasswordField();
         pssSenha = new javax.swing.JPasswordField();
-        txtDataNasc = new javax.swing.JTextField();
-        txtCpf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        txtDataNasc = new javax.swing.JFormattedTextField();
+        txtCpf = new javax.swing.JFormattedTextField();
         jCadEmpresa = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -323,6 +344,24 @@ public class HomeView extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Nome:");
 
+        try {
+            txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDataNasc.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        txtDataNasc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataNascActionPerformed(evt);
+            }
+        });
+
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jCadastrarLayout = new javax.swing.GroupLayout(jCadastrar);
         jCadastrar.setLayout(jCadastrarLayout);
         jCadastrarLayout.setHorizontalGroup(
@@ -344,13 +383,14 @@ public class HomeView extends javax.swing.JFrame {
                                     .addComponent(jLabel8))
                                 .addGap(32, 32, 32)
                                 .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jCadastrarLayout.createSequentialGroup()
-                                        .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(txtNome)
-                                    .addComponent(txtCpf)
                                     .addComponent(pssSenha)
-                                    .addComponent(pssCSenha)))
+                                    .addComponent(pssCSenha)
+                                    .addGroup(jCadastrarLayout.createSequentialGroup()
+                                        .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addComponent(jLabel6))))
                 .addContainerGap(197, Short.MAX_VALUE))
         );
@@ -647,6 +687,10 @@ public class HomeView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarEmpresaActionPerformed
 
+    private void txtDataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataNascActionPerformed
+
+    }//GEN-LAST:event_txtDataNascActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -661,16 +705,24 @@ public class HomeView extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -717,9 +769,9 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JTable tbResiduos;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCnpj;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtCustoTransporte;
-    private javax.swing.JTextField txtDataNasc;
+    private javax.swing.JFormattedTextField txtDataNasc;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeEmpresa;
     private javax.swing.JTextField txtNumero;
