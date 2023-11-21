@@ -1,5 +1,5 @@
 # FrontCode - Descarte Consciente
-## Versão: 0.6
+## Versão: 0.14
 ## Status do Projeto: ⚠️ Em andamento
 
 ## Tópicos
