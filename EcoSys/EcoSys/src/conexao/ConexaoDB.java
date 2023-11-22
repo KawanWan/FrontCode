@@ -9,9 +9,9 @@ public class ConexaoDB {
     public static Connection conectar() {
         Connection conn = null;
         try {
-            String url = "jdbc:mysql://localhost:3306/bancolixoeletronico?useSSL=false&serverTimezone=UTC";
+            String url = "jdbc:mysql://localhost:3306/BancoLixoEletronico";
             String usuario = "root";
-            String senha = "KWdmDN#18072021";
+            String senha = "Cthulhu#23$";
 
             conn = DriverManager.getConnection(url, usuario, senha);
 

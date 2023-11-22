@@ -42,13 +42,23 @@ public class HomeView extends javax.swing.JFrame {
      */
     public HomeView() {
         initComponents();
-
+        formatandoInterface();
         atualizarTabela();
         botaoHabilitado(false);
         formatarData();
         formatarCpf();
     }
-
+    
+    public void formatandoInterface() {
+        // Tirando cor de fundo dos botões
+        btnCadastrarFunc.setContentAreaFilled(false);
+        btnCadastrarEmpresa.setContentAreaFilled(false);
+        abaCadastrar.setContentAreaFilled(false);
+        btnCadastrar.setContentAreaFilled(false);
+        btnEditar.setContentAreaFilled(false);
+        btnExcluir.setContentAreaFilled(false);
+    }
+    
     public void setUsuario(String nome) {
         this.nomeUsuario = nome;
     }
@@ -58,11 +68,15 @@ public class HomeView extends javax.swing.JFrame {
     }
 
     public void botaoHabilitado(boolean habilitar) {
+        // Habilitando/Desabilitando botões
         btnEditar.setEnabled(habilitar);
         btnExcluir.setEnabled(habilitar);
     }
 
     public void abaSelecionada(boolean residuos, boolean cadastrar, boolean empresas) {
+        btnCadastrarFunc.setContentAreaFilled(false);
+        btnCadastrarEmpresa.setContentAreaFilled(false);
+        abaCadastrar.setContentAreaFilled(false);
         jResiduos.setVisible(residuos);
         abaResiduos.setSelected(residuos);
         jCadastrar.setVisible(cadastrar);
@@ -159,8 +173,14 @@ public class HomeView extends javax.swing.JFrame {
 
         abaCadastrar.setBackground(new java.awt.Color(32, 32, 48));
         abaCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        abaCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
         abaCadastrar.setText("Cadastrar Funcionário");
+        abaCadastrar.setBorder(null);
+        abaCadastrar.setBorderPainted(false);
+        abaCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        abaCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         abaCadastrar.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        abaCadastrar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35.png"))); // NOI18N
         abaCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abaCadastrarActionPerformed(evt);
@@ -169,10 +189,15 @@ public class HomeView extends javax.swing.JFrame {
 
         abaResiduos.setBackground(new java.awt.Color(32, 32, 48));
         abaResiduos.setForeground(new java.awt.Color(255, 255, 255));
+        abaResiduos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
         abaResiduos.setSelected(true);
         abaResiduos.setText("Resíduos");
-        abaResiduos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        abaResiduos.setBorder(null);
+        abaResiduos.setBorderPainted(false);
+        abaResiduos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        abaResiduos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         abaResiduos.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        abaResiduos.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35.png"))); // NOI18N
         abaResiduos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abaResiduosActionPerformed(evt);
@@ -183,14 +208,19 @@ public class HomeView extends javax.swing.JFrame {
         lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUserName.setText(this.nomeUsuario);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Perfil.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Perfil_150x150.png"))); // NOI18N
 
         abaEmpresas.setBackground(new java.awt.Color(32, 32, 48));
         abaEmpresas.setForeground(new java.awt.Color(255, 255, 255));
-        abaEmpresas.setSelected(true);
+        abaEmpresas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
         abaEmpresas.setText("Empresas");
-        abaEmpresas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        abaEmpresas.setBorder(null);
+        abaEmpresas.setBorderPainted(false);
+        abaEmpresas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        abaEmpresas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         abaEmpresas.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        abaEmpresas.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
+        abaEmpresas.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35.png"))); // NOI18N
         abaEmpresas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abaEmpresasActionPerformed(evt);
@@ -201,31 +231,34 @@ public class HomeView extends javax.swing.JFrame {
         barraLateral.setLayout(barraLateralLayout);
         barraLateralLayout.setHorizontalGroup(
             barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraLateralLayout.createSequentialGroup()
-                .addGap(0, 33, Short.MAX_VALUE)
+            .addGroup(barraLateralLayout.createSequentialGroup()
                 .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(abaCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(abaEmpresas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))))
+                    .addGroup(barraLateralLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(abaCadastrar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraLateralLayout.createSequentialGroup()
+                        .addContainerGap(30, Short.MAX_VALUE)
+                        .addGroup(barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(abaEmpresas, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(abaResiduos, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 30, 30))
         );
         barraLateralLayout.setVerticalGroup(
             barraLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(barraLateralLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUserName)
                 .addGap(25, 25, 25)
-                .addComponent(abaResiduos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(abaEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(abaResiduos)
+                .addGap(18, 18, 18)
+                .addComponent(abaEmpresas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(abaCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addComponent(abaCadastrar)
+                .addGap(45, 45, 45))
         );
 
         jMain.setBackground(new java.awt.Color(32, 32, 48));
@@ -238,21 +271,40 @@ public class HomeView extends javax.swing.JFrame {
 
         jResiduos.setOpaque(false);
 
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Menu.png"))); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.setBorder(null);
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
+        btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
             }
         });
 
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Menu.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.setBorder(null);
+        btnEditar.setBorderPainted(false);
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
+        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
 
+        btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Menu.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setBorder(null);
+        btnCadastrar.setBorderPainted(false);
+        btnCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -285,25 +337,24 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(jResiduosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jResiduosLayout.createSequentialGroup()
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jResiduosLayout.createSequentialGroup()
+                        .addComponent(btnCadastrar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(btnEditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
         jResiduosLayout.setVerticalGroup(
             jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jResiduosLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
+                .addGroup(jResiduosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -316,7 +367,13 @@ public class HomeView extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cadastro de Funcionários");
 
+        btnCadastrarFunc.setBackground(new java.awt.Color(20, 20, 20));
+        btnCadastrarFunc.setForeground(new java.awt.Color(255, 255, 255));
+        btnCadastrarFunc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
         btnCadastrarFunc.setText("Cadastrar");
+        btnCadastrarFunc.setBorder(null);
+        btnCadastrarFunc.setBorderPainted(false);
+        btnCadastrarFunc.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCadastrarFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarFuncActionPerformed(evt);
@@ -367,37 +424,36 @@ public class HomeView extends javax.swing.JFrame {
         jCadastrarLayout.setHorizontalGroup(
             jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jCadastrarLayout.createSequentialGroup()
+                .addGap(141, 141, 141)
                 .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jCadastrarLayout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(btnCadastrarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jCadastrarLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
+                        .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(32, 32, 32)
                         .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome)
+                            .addComponent(pssSenha)
+                            .addComponent(pssCSenha)
                             .addGroup(jCadastrarLayout.createSequentialGroup()
-                                .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(32, 32, 32)
                                 .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNome)
-                                    .addComponent(pssSenha)
-                                    .addComponent(pssCSenha)
-                                    .addGroup(jCadastrarLayout.createSequentialGroup()
-                                        .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addComponent(jLabel6))))
-                .addContainerGap(197, Short.MAX_VALUE))
+                                    .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 10, Short.MAX_VALUE))))
+                    .addComponent(jLabel6))
+                .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(jCadastrarLayout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(btnCadastrarFunc)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jCadastrarLayout.setVerticalGroup(
             jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jCadastrarLayout.createSequentialGroup()
-                .addContainerGap(127, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(51, 51, 51)
                 .addGroup(jCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -450,7 +506,14 @@ public class HomeView extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Custo de Transporte:");
 
+        btnCadastrarEmpresa.setBackground(new java.awt.Color(20, 20, 20));
+        btnCadastrarEmpresa.setForeground(new java.awt.Color(255, 255, 255));
+        btnCadastrarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Botao_150x35_Unselected.png"))); // NOI18N
         btnCadastrarEmpresa.setText("Cadastrar");
+        btnCadastrarEmpresa.setBorder(null);
+        btnCadastrarEmpresa.setBorderPainted(false);
+        btnCadastrarEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrarEmpresa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCadastrarEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarEmpresaActionPerformed(evt);
@@ -486,8 +549,8 @@ public class HomeView extends javax.swing.JFrame {
                             .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jCadEmpresaLayout.createSequentialGroup()
                         .addGap(219, 219, 219)
-                        .addComponent(btnCadastrarEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(131, Short.MAX_VALUE))
+                        .addComponent(btnCadastrarEmpresa)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jCadEmpresaLayout.setVerticalGroup(
             jCadEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,7 +583,7 @@ public class HomeView extends javax.swing.JFrame {
                     .addComponent(txtCustoTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addComponent(btnCadastrarEmpresa)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMain.add(jCadEmpresa, "card4");
@@ -547,20 +610,10 @@ public class HomeView extends javax.swing.JFrame {
 
     private void abaResiduosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaResiduosActionPerformed
         abaSelecionada(true, false, false);
-        if (abaResiduos.isSelected()) {
-            abaResiduos.setBackground(new java.awt.Color(32, 32, 48));
-        } else {
-            abaResiduos.setBackground(new java.awt.Color(12, 124, 89));
-        }
     }//GEN-LAST:event_abaResiduosActionPerformed
 
     private void abaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaCadastrarActionPerformed
         abaSelecionada(false, true, false);
-        if (abaCadastrar.isSelected()) {
-            abaCadastrar.setBackground(new java.awt.Color(32, 32, 48));
-        } else {
-            abaCadastrar.setBackground(new java.awt.Color(12, 124, 89));
-        }
     }//GEN-LAST:event_abaCadastrarActionPerformed
 
     private void btnCadastrarFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncActionPerformed
@@ -627,13 +680,7 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void abaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaEmpresasActionPerformed
-        // TODO add your handling code here:
         abaSelecionada(false, false, true);
-        if (abaEmpresas.isSelected()) {
-            abaEmpresas.setBackground(new java.awt.Color(32, 32, 48));
-        } else {
-            abaEmpresas.setBackground(new java.awt.Color(12, 124, 89));
-        }
     }//GEN-LAST:event_abaEmpresasActionPerformed
 
     private void tbResiduosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbResiduosMouseClicked
